@@ -1,0 +1,76 @@
+#NODE-RED FLOWS
+#Connecting Arduino UNO with Node-Red
+
+[{&quot;id&quot;:&quot;ee45ead9.ae6788&quot;,&quot;type&quot;:&quot;change&quot;,&quot;z&quot;:&quot;3c7ed83c.221308&quot;,&quot;name&quot;:&quot;
+&quot;,&quot;rules&quot;:[{&quot;t&quot;:&quot;change&quot;,&quot;p&quot;:&quot;payload&quot;,&quot;pt&quot;:&quot;msg&quot;,&quot;from&quot;:&quot;1&quot;,&quot;fromt&quot;:&quot;num&quot;,&quot;to&quot;
+
+
+
+:&quot;lat:17.3552,
+lon:78.5263&quot;,&quot;tot&quot;:&quot;str&quot;}],&quot;action&quot;:&quot;&quot;,&quot;property&quot;:&quot;&quot;,&quot;from&quot;:&quot;&quot;,&quot;to&quot;:&quot;&quot;,&quot;reg&quot;:false,&quot;
+x&quot;:520,&quot;y&quot;:300,&quot;wires&quot;:[[&quot;36ac770f.9a5dc8&quot;,&quot;3d4d02c9.23e3de&quot;]]}]
+Web Hook Relay Flow
+[{&quot;id&quot;:&quot;9c941d51.6cf92&quot;,&quot;type&quot;:&quot;tab&quot;,&quot;label&quot;:&quot;Flow
+6&quot;,&quot;disabled&quot;:false,&quot;info&quot;:&quot;&quot;},{&quot;id&quot;:&quot;30bbd2ff.e9fece&quot;,&quot;type&quot;:&quot;webhookrelay&quot;,&quot;
+z&quot;:&quot;9c941d51.6cf92&quot;,&quot;buckets&quot;:&quot;owntracks&quot;,&quot;x&quot;:640,&quot;y&quot;:80,&quot;wires&quot;:[[&quot;6b332e
+c9.21773&quot;]]},{&quot;id&quot;:&quot;6b332ec9.21773&quot;,&quot;type&quot;:&quot;function&quot;,&quot;z&quot;:&quot;9c941d51.6cf92&quot;
+,&quot;name&quot;:&quot;extract body&quot;,&quot;func&quot;:&quot;return {\n payload:
+msg.payload\n};&quot;,&quot;outputs&quot;:1,&quot;noerr&quot;:0,&quot;x&quot;:410,&quot;y&quot;:140,&quot;wires&quot;:[[&quot;443277cb.
+3ad798&quot;]]},{&quot;id&quot;:&quot;443277cb.3ad798&quot;,&quot;type&quot;:&quot;owntracks&quot;,&quot;z&quot;:&quot;9c941d51.6cf9
+2&quot;,&quot;x&quot;:210,&quot;y&quot;:220,&quot;wires&quot;:[[&quot;437f31ae.7baf7&quot;]]},{&quot;id&quot;:&quot;3d756b98.1a7aa4&quot;,&quot;ty
+pe&quot;:&quot;worldmap&quot;,&quot;z&quot;:&quot;9c941d51.6cf92&quot;,&quot;name&quot;:&quot;&quot;,&quot;lat&quot;:&quot;&quot;,&quot;lon&quot;:&quot;&quot;,&quot;zoom&quot;:&quot;&quot;,&quot;la
+yer&quot;:&quot;&quot;,&quot;cluster&quot;:&quot;&quot;,&quot;maxage&quot;:&quot;600&quot;,&quot;usermenu&quot;:&quot;show&quot;,&quot;layers&quot;:&quot;show&quot;,&quot;pan
+it&quot;:&quot;false&quot;,&quot;panlock&quot;:&quot;false&quot;,&quot;zoomlock&quot;:&quot;false&quot;,&quot;hiderightclick&quot;:&quot;false&quot;,&quot;coord
+s&quot;:&quot;none&quot;,&quot;showgrid&quot;:&quot;false&quot;,&quot;path&quot;:&quot;/worldmap&quot;,&quot;x&quot;:620,&quot;y&quot;:320,&quot;wires&quot;:[]},{&quot;
+id&quot;:&quot;fd043513.fd3658&quot;,&quot;type&quot;:&quot;worldmap-
+tracks&quot;,&quot;z&quot;:&quot;9c941d51.6cf92&quot;,&quot;name&quot;:&quot;&quot;,&quot;depth&quot;:&quot;10&quot;,&quot;layer&quot;:&quot;combined&quot;,&quot;x&quot;:
+430,&quot;y&quot;:380,&quot;wires&quot;:[[&quot;3d756b98.1a7aa4&quot;]]},{&quot;id&quot;:&quot;437f31ae.7baf7&quot;,&quot;type&quot;:&quot;f
+unction&quot;,&quot;z&quot;:&quot;9c941d51.6cf92&quot;,&quot;name&quot;:&quot;format json&quot;,&quot;func&quot;:&quot;var
+name=msg.payload.tid;\nvar lat=msg.payload.lat;\nvar
+lon=msg.payload.lon;\nreturn {\n payload: {\n \&quot;name\&quot;: name,\n
+\&quot;lat\&quot;: lat,\n \&quot;lon\&quot;: lon,\n icon: &#39;user-circle-o&#39;\n
+}\n};\n&quot;,&quot;outputs&quot;:1,&quot;noerr&quot;:0,&quot;x&quot;:210,&quot;y&quot;:320,&quot;wires&quot;:[[&quot;3d756b98.1a7aa4&quot;,&quot;f
+d043513.fd3658&quot;]]},{&quot;id&quot;:&quot;cc4de544.a9dc48&quot;,&quot;type&quot;:&quot;link
+in&quot;,&quot;z&quot;:&quot;9c941d51.6cf92&quot;,&quot;name&quot;:&quot;&quot;,&quot;links&quot;:[&quot;3d4d02c9.23e3de&quot;],&quot;x&quot;:180,&quot;y&quot;:
+80,&quot;wires&quot;:[[&quot;30bbd2ff.e9fece&quot;]]}]
+
+#Getting SMS using Twilio and using MQTT Protocol Flow:
+
+[{&quot;id&quot;:&quot;2692e7a0.5e0538&quot;,&quot;type&quot;:&quot;tab&quot;,&quot;label&quot;:&quot;Flow
+8&quot;,&quot;disabled&quot;:false,&quot;info&quot;:&quot;&quot;},{&quot;id&quot;:&quot;c33a3598.cb2288&quot;,&quot;type&quot;:&quot;mqtt
+in&quot;,&quot;z&quot;:&quot;2692e7a0.5e0538&quot;,&quot;name&quot;:&quot;&quot;,&quot;topic&quot;:&quot;location&quot;,&quot;qos&quot;:&quot;2&quot;,&quot;datatype&quot;:
+&quot;auto&quot;,&quot;broker&quot;:&quot;7265c86c.7045d8&quot;,&quot;x&quot;:290,&quot;y&quot;:200,&quot;wires&quot;:[[&quot;bb82468c.29
+e968&quot;]]},{&quot;id&quot;:&quot;f4afc7e4.81fde8&quot;,&quot;type&quot;:&quot;mqtt
+
+
+
+out&quot;,&quot;z&quot;:&quot;2692e7a0.5e0538&quot;,&quot;name&quot;:&quot;&quot;,&quot;topic&quot;:&quot;location&quot;,&quot;qos&quot;:&quot;&quot;,&quot;retain&quot;:&quot;&quot;,&quot;
+broker&quot;:&quot;7265c86c.7045d8&quot;,&quot;x&quot;:300,&quot;y&quot;:80,&quot;wires&quot;:[]},{&quot;id&quot;:&quot;b7964b00.4faec
+8&quot;,&quot;type&quot;:&quot;mosca
+in&quot;,&quot;z&quot;:&quot;2692e7a0.5e0538&quot;,&quot;mqtt_port&quot;:&quot;1884&quot;,&quot;mqtt_ws_port&quot;:8080,&quot;name&quot;
+:&quot;&quot;,&quot;username&quot;:&quot;&quot;,&quot;password&quot;:&quot;&quot;,&quot;dburl&quot;:&quot;&quot;,&quot;x&quot;:390,&quot;y&quot;:140,&quot;wires&quot;:[[]]},{&quot;id&quot;:&quot;9
+71d8b5.2789278&quot;,&quot;type&quot;:&quot;link
+in&quot;,&quot;z&quot;:&quot;2692e7a0.5e0538&quot;,&quot;name&quot;:&quot;&quot;,&quot;links&quot;:[&quot;36ac770f.9a5dc8&quot;],&quot;x&quot;:95,&quot;y&quot;:
+60,&quot;wires&quot;:[[&quot;f4afc7e4.81fde8&quot;]]},{&quot;id&quot;:&quot;bb82468c.29e968&quot;,&quot;type&quot;:&quot;twilio
+out&quot;,&quot;z&quot;:&quot;2692e7a0.5e0538&quot;,&quot;twilio&quot;:&quot;2b1e3f3a.088e8&quot;,&quot;twilioType&quot;:&quot;sms&quot;,&quot;
+url&quot;:&quot;&quot;,&quot;number&quot;:&quot;+919989462737&quot;,&quot;name&quot;:&quot;to&quot;,&quot;x&quot;:470,&quot;y&quot;:200,&quot;wires&quot;:[]},{&quot;i
+d&quot;:&quot;4c658eda.49898&quot;,&quot;type&quot;:&quot;mqtt
+in&quot;,&quot;z&quot;:&quot;2692e7a0.5e0538&quot;,&quot;name&quot;:&quot;&quot;,&quot;topic&quot;:&quot;location&quot;,&quot;qos&quot;:&quot;2&quot;,&quot;datatype&quot;:
+&quot;auto&quot;,&quot;broker&quot;:&quot;7265c86c.7045d8&quot;,&quot;x&quot;:290,&quot;y&quot;:320,&quot;wires&quot;:[[&quot;a3460dfb.3ca
+19&quot;]]},{&quot;id&quot;:&quot;a3460dfb.3ca19&quot;,&quot;type&quot;:&quot;twilio
+out&quot;,&quot;z&quot;:&quot;2692e7a0.5e0538&quot;,&quot;twilio&quot;:&quot;2b1e3f3a.088e8&quot;,&quot;twilioType&quot;:&quot;sms&quot;,&quot;
+url&quot;:&quot;&quot;,&quot;number&quot;:&quot;+919989462737&quot;,&quot;name&quot;:&quot;to&quot;,&quot;x&quot;:470,&quot;y&quot;:320,&quot;wires&quot;:[]},{&quot;i
+d&quot;:&quot;1f2297e0.e3a458&quot;,&quot;type&quot;:&quot;mqtt
+in&quot;,&quot;z&quot;:&quot;2692e7a0.5e0538&quot;,&quot;name&quot;:&quot;&quot;,&quot;topic&quot;:&quot;location&quot;,&quot;qos&quot;:&quot;2&quot;,&quot;datatype&quot;:
+&quot;auto&quot;,&quot;broker&quot;:&quot;7265c86c.7045d8&quot;,&quot;x&quot;:290,&quot;y&quot;:260,&quot;wires&quot;:[[&quot;6cc00da1.dcd
+304&quot;]]},{&quot;id&quot;:&quot;6cc00da1.dcd304&quot;,&quot;type&quot;:&quot;twilio
+out&quot;,&quot;z&quot;:&quot;2692e7a0.5e0538&quot;,&quot;twilio&quot;:&quot;2b1e3f3a.088e8&quot;,&quot;twilioType&quot;:&quot;sms&quot;,&quot;
+url&quot;:&quot;&quot;,&quot;number&quot;:&quot;+919989462737&quot;,&quot;name&quot;:&quot;to&quot;,&quot;x&quot;:470,&quot;y&quot;:260,&quot;wires&quot;:[]},{&quot;i
+d&quot;:&quot;7265c86c.7045d8&quot;,&quot;type&quot;:&quot;mqtt-
+broker&quot;,&quot;z&quot;:&quot;&quot;,&quot;name&quot;:&quot;mosca&quot;,&quot;broker&quot;:&quot;localhost&quot;,&quot;port&quot;:&quot;1884&quot;,&quot;clientid&quot;:&quot;&quot;
+,&quot;usetls&quot;:false,&quot;compatmode&quot;:true,&quot;keepalive&quot;:&quot;60&quot;,&quot;cleansession&quot;:true,&quot;birt
+hTopic&quot;:&quot;&quot;,&quot;birthQos&quot;:&quot;0&quot;,&quot;birthPayload&quot;:&quot;&quot;,&quot;closeTopic&quot;:&quot;&quot;,&quot;closeQos&quot;:&quot;0&quot;,&quot;cl
+osePayload&quot;:&quot;&quot;,&quot;willTopic&quot;:&quot;&quot;,&quot;willQos&quot;:&quot;0&quot;,&quot;willPayload&quot;:&quot;&quot;},{&quot;id&quot;:&quot;2b1e3f3a.
+088e8&quot;,&quot;type&quot;:&quot;twilio-
+api&quot;,&quot;z&quot;:&quot;&quot;,&quot;name&quot;:&quot;manz&quot;,&quot;sid&quot;:&quot;AC750ce05d8f6d9343f8254d51d6e9c47d&quot;
+,&quot;from&quot;:&quot;+17372456562&quot;}]
